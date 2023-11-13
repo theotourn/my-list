@@ -12,7 +12,8 @@
         </div>
         <div class="offcanvas-body">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" (keyup.enter)="adicionarLista()" [(ngModel)]="novaListaNome" placeholder="Nova lista">
+            <input type="text" class="form-control" (keyup.enter)="adicionarLista()" [(ngModel)]="novaListaNome"
+              placeholder="Nova lista">
             <div class="input-group-append">
               <button class="btn btn-success" (click)="adicionarLista()">Adicionar Lista</button>
             </div>
@@ -22,10 +23,14 @@
             <button *ngFor="let lista of listas; let i = index" type="button"
               class="list-group-item list-group-item-action" [class.active]="i === listaAtivaIndex"
               (click)="selecionarLista(i)">
-              {{ lista.nome }}
-              <button class="btn btn-danger btn-sm float-right" style="float: right;" (click)="removerLista(i)">
-                <i class="fa fa-trash"></i>
-              </button>
+              <div class="d-flex justify-content-between">
+                <div class="align-self-center">
+                  {{ lista.nome }}
+                </div>
+                <button class="btn btn-danger btn-sm float-right" style="float: right;" (click)="removerLista(i)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
             </button>
           </div>
         </div>
@@ -34,7 +39,8 @@
 
 
       <div class="input-group mb-3">
-        <input type="text" class="form-control" (keyup.enter)="adicionarTarefa()" [(ngModel)]="novaTarefa" placeholder="Nova tarefa">
+        <input type="text" class="form-control" (keyup.enter)="adicionarTarefa()" [(ngModel)]="novaTarefa"
+          placeholder="Nova tarefa">
         <div class="input-group-append">
           <button class="btn btn-primary" (click)="adicionarTarefa()">Adicionar Tarefa</button>
         </div>
@@ -42,10 +48,15 @@
 
       <ul class="list-group">
         <li *ngFor="let tarefa of listas[listaAtivaIndex]?.itens; let i = index" class="list-group-item">
-          {{ tarefa }}
-          <button class="btn btn-danger btn-sm float-right" style="float: right;" (click)="removerTarefa(i)">
-            <i class="fa fa-trash"></i>
-          </button>
+          <div class="d-flex justify-content-between">
+
+            <div class="align-self-center">
+              {{ tarefa }}
+            </div>
+              <button class="btn btn-danger btn-sm float-right" style="float: right;" (click)="removerTarefa(i)">
+                <i class="fa fa-trash"></i>
+              </button>
+          </div>
         </li>
       </ul>
     </div>
