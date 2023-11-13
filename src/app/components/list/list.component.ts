@@ -7,6 +7,7 @@ import { StorageService } from '../../services/storage.service';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
+  tarefaConcluida: boolean[] = [];
   listas: { nome: string; itens: string[] }[] = [];
   listaAtivaIndex: number = 0;
   novaListaNome: string = '';
@@ -16,11 +17,12 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     // Recupera as listas salvas no armazenamento local
-    const savedLists = this.storageService.getItem('listas');
-    if (savedLists) {
-      this.listas = savedLists;
-    }
+  const savedLists = this.storageService.getItem('listas');
+  if (savedLists) {
+    this.listas = savedLists.listas || [];
+    this.tarefaConcluida = savedLists.tarefaConcluida || [];
   }
+}
 
   adicionarLista(): void {
     if (this.novaListaNome.trim() !== '') {
@@ -47,13 +49,19 @@ export class ListComponent implements OnInit {
     }
   }
 
-  removerTarefa(index: number): void {
-    this.listas[this.listaAtivaIndex].itens.splice(index, 1);
+  concluirTarefa(index: number): void {
+    this.tarefaConcluida[index] = true;
     this.salvarListas();
   }
-
+  
+  removerTarefa(index: number): void {
+    this.listas[this.listaAtivaIndex].itens.splice(index, 1);
+    this.tarefaConcluida.splice(index, 1);
+    this.salvarListas();
+  }
+  
   private salvarListas(): void {
-    // Salva as listas no armazenamento local
-    this.storageService.setItem('listas', this.listas);
+    // Salva as listas e tarefas concluídas no armazenamento local
+    this.storageService.setItem('listas', { listas: this.listas, tarefaConcluida: this.tarefaConcluida });
   }
 }

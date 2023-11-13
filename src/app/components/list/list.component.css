@@ -1,0 +1,7 @@
+/* Adicione a classe 'concluida' para destacar visualmente as tarefas concluídas */
+.list-group-item.concluida {
+    background-color: #d4edda;
+    color: #155724;
+    text-decoration: line-through;
+  }
+  
