@@ -21,18 +21,18 @@
 
           <div class="list-group">
             <button *ngFor="let lista of listas; let i = index" type="button"
-              class="list-group-item list-group-item-action" [class.active]="i === listaAtivaIndex"
-              (click)="selecionarLista(i)">
-              <div class="d-flex justify-content-between">
-                <div class="align-self-center">
+              class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+              [class.active]="i === listaAtivaIndex" (click)="selecionarLista(i)">
+              <div class="d-flex align-items-center">
+                <div class="flex-grow-1">
                   {{ lista.nome }}
                 </div>
-                <button class="btn btn-danger btn-sm float-right" style="float: right;" (click)="removerLista(i)">
-                  <i class="fa fa-trash"></i>
-                </button>
               </div>
+              <button class="btn btn-danger btn-sm ms-1" (click)="removerLista(i)">
+                <i class="fa fa-trash"></i>
+              </button>
             </button>
-          </div>
+          </div>            
         </div>
       </div>
 
@@ -47,20 +47,25 @@
       </div>
       <ul class="list-group">
         <li *ngFor="let tarefa of listas[listaAtivaIndex]?.itens; let i = index" class="list-group-item"
-          [class.concluida]="tarefaConcluida[i]">
+            [class.concluida]="tarefa.concluida">
           <div class="d-flex justify-content-between align-items-center">
-            <span>{{ tarefa }}</span>
-            <div *ngIf="!tarefaConcluida[i]">
-              <button class="btn btn-success btn-sm" (click)="concluirTarefa(i)">
+            <div class="flex-grow-1">
+              <span>{{ tarefa.nome }}</span>
+            </div>
+            <div *ngIf="!tarefa.concluida" class="d-flex">
+              <button class="btn btn-success btn-sm me-1" (click)="concluirTarefa(i)">
                 <i class="fa fa-check"></i>
               </button>
-              <button class="btn btn-danger btn-sm ms-1" (click)="removerTarefa(i)">
+              <button class="btn btn-danger btn-sm" (click)="removerTarefa(i)">
                 <i class="fa fa-trash"></i>
               </button>
             </div>
           </div>
         </li>
-      </ul>
+      </ul>      
+      <div *ngIf="listas.length === 0" class="alert alert-warning" role="alert">
+        Nenhuma lista criada. Por favor, crie uma lista antes de adicionar tarefas.
+      </div>
     </div>
   </div>
 </div>
