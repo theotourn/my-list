@@ -5,12 +5,7 @@
     text-decoration: line-through;
   }
   
-  /* Adicione estilos para quebrar a linha antes dos botões se o conteúdo for muito grande */
+/* Adicione estilos para quebrar a linha antes dos botões se o conteúdo for muito grande */
 .list-group-item {
   white-space: normal; /* Define quebra de linha automática para o conteúdo do item da lista */
-}
-
-/* Adicione margem inferior para separar as tarefas */
-.list-group-item + .list-group-item {
-  margin-top: 5px;
 }
